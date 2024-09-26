@@ -1,13 +1,13 @@
 # BCSNP
-Bayesian Compressive Sensing Using Normal Product Priors
+% Bayesian Compressive Sensing Using Normal Product Priors
 function [ est_x,est_s] = BCSNP(y,N,M,A,maxiter)
 % y is the observation
 % epslon is the noise standard deviation, here could be regarded as a
 % tunning parameter
 % This file eliminate the ill posed problem in noieless case+prunning
 %%
-    kappa=10*ones(N,1);% The standard deviation of a
-    gamma=10*ones(N,1);% The standard deviation of b
+    kappa=ones(N,1);% The standard deviation of a
+    gamma=ones(N,1);% The standard deviation of b
     % (kappa^2+gamma^2)^2/4 determine the standard variance of gaussian
     %  product
 
@@ -30,10 +30,7 @@ while ~converged
 %             mean_a=mean_a(mask);
 %             kappa=kappa(mask);
 %             gamma=gamma(mask); 
-
-            
-            
-            
+   
             %%%%%%%%% update b %%%%%%%%
             var_b=(eye(Num)-diag(gamma)*pinv(A*diag(mean_a)*diag(gamma))*A*diag(mean_a))*diag(gamma.^2);
             mean_b=diag(gamma)*pinv(A*diag(mean_a)*diag(gamma))*y;
